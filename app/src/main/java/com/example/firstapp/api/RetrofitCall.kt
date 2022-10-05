@@ -1,18 +1,16 @@
 package com.example.firstapp.api
 
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
+import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitCall {
+object RetrofitCall {
 
-    companion object {
-        const val URL_COUNTRY_API = "https://dummyjson.com/products"
+    val baseUrl = "https://dummyjson.com/"
 
-        val retro =  Retrofit.Builder()
-            .baseUrl(URL_COUNTRY_API)
-            .addConverterFactory(MoshiConverterFactory.create())
+    fun getInstance(): Retrofit{
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-    val service = retro.create(ProductService::class.java)
 }
